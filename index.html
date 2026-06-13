@@ -21,16 +21,6 @@
         .hero-bg {
             background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), 
                         url('img/img_principal.jpeg') center/cover no-repeat;
-            background-position: center;
-        }
-
-        /* Modal */
-        .modal {
-            animation: fadeInModal 0.3s ease;
-        }
-        @keyframes fadeInModal {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
@@ -39,7 +29,9 @@
     <!-- Navbar -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-[#e89ab8]">Ivannia Placencia</h1>
+            <a href="#" class="flex items-center">
+                <img src="img/img_logo.png" alt="Ivannia Placencia" class="h-12 w-auto">
+            </a>
             <div class="hidden md:flex gap-8 text-lg">
                 <a href="#sobre" class="hover:text-[#e89ab8] transition">Sobre mí</a>
                 <a href="#servicios" class="hover:text-[#e89ab8] transition">Servicios</a>
@@ -135,7 +127,7 @@
         </div>
     </section>
 
-    <!-- Modal -->
+    <!-- Modal de Servicios -->
     <div id="serviceModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
         <div class="modal bg-white max-w-lg w-full mx-4 rounded-3xl overflow-hidden">
             <div class="p-8">
@@ -224,16 +216,19 @@
             <h2 class="text-5xl heading-script mb-6">¿Lista para impulsar tu negocio?</h2>
             <p class="text-xl mb-12">Cada negocio tiene un potencial único. Mi propósito es ayudarte a descubrirlo.</p>
             
-            <form action="https://formspree.io/f/tu-id-aqui" method="POST" class="space-y-6">
-                <input type="text" name="nombre" placeholder="Nombre y Apellido" required class="w-full px-6 py-4 rounded-2xl text-gray-800">
+            <form id="whatsappForm" class="space-y-6">
+                <input type="text" id="nombre" placeholder="Nombre y Apellido" required class="w-full px-6 py-4 rounded-2xl text-gray-800">
                 <div class="grid grid-cols-2 gap-6">
-                    <input type="tel" name="telefono" placeholder="Teléfono" required class="px-6 py-4 rounded-2xl text-gray-800">
-                    <input type="email" name="email" placeholder="Correo electrónico" required class="px-6 py-4 rounded-2xl text-gray-800">
+                    <input type="tel" id="telefono" placeholder="Teléfono" required class="px-6 py-4 rounded-2xl text-gray-800">
+                    <input type="email" id="email" placeholder="Correo electrónico" required class="px-6 py-4 rounded-2xl text-gray-800">
                 </div>
-                <input type="text" name="asunto" placeholder="Asunto" class="w-full px-6 py-4 rounded-2xl text-gray-800">
-                <textarea name="mensaje" rows="6" placeholder="Cuéntame sobre tu negocio..." required class="w-full px-6 py-4 rounded-3xl text-gray-800"></textarea>
-                <button type="submit" class="w-full bg-white text-[#e89ab8] font-semibold py-5 rounded-2xl text-xl hover:bg-gray-100 transition">
-                    Enviar mensaje
+                <input type="text" id="asunto" placeholder="Asunto" class="w-full px-6 py-4 rounded-2xl text-gray-800">
+                <textarea id="mensaje" rows="6" placeholder="Cuéntame sobre tu negocio..." required class="w-full px-6 py-4 rounded-3xl text-gray-800"></textarea>
+                
+                <button type="submit" 
+                        class="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white font-semibold py-5 rounded-2xl text-xl transition flex items-center justify-center gap-3">
+                    <span>Enviar WhatsApp</span>
+                    <span class="text-2xl">📱</span>
                 </button>
             </form>
         </div>
@@ -246,59 +241,18 @@
     </footer>
 
     <script>
+        // Datos de servicios (sin cambios)
         const services = [
-            {
-                title: "Emprendimiento y Desarrollo Comercial",
-                desc: "Convierte tu idea de negocio en un proyecto con dirección y crecimiento.",
-                items: [
-                    "Modelo de Negocio",
-                    "Propuesta de Valor",
-                    "Estrategias de crecimiento",
-                    "Desarrollo de marca",
-                    "Formalización de emprendimientos"
-                ]
-            },
-            {
-                title: "Estudios de Mercado",
-                desc: "Conoce tu mercado y toma decisiones con información real.",
-                items: [
-                    "Análisis de Competencia",
-                    "Evaluación de Oportunidades de Negocio",
-                    "Levantamiento de Información Comercial",
-                    "Encuestas y Análisis de Resultados",
-                    "Diagnósticos Comerciales"
-                ]
-            },
-            {
-                title: "Gestión Comercial",
-                desc: "Organiza tu negocio para mejorar resultados y aumentar su rentabilidad.",
-                items: [
-                    "Organización Administrativa",
-                    "Indicadores de Gestión",
-                    "Evaluación de Rentabilidad",
-                    "Apoyo en Planificación Estratégica",
-                    "Optimización de Procesos Internos"
-                ]
-            },
-            {
-                title: "Marketing y Redes Sociales",
-                desc: "Potencia tu presencia digital y conecta con más clientes.",
-                items: [
-                    "Diagnóstico de Redes Sociales",
-                    "Estrategias de Contenido",
-                    "Planificación de Historias, Reels y Publicaciones",
-                    "Posicionamiento de la Marca",
-                    "Análisis de Competencia",
-                    "Estrategias de Fidelización de Clientes"
-                ]
-            }
+            { title: "Emprendimiento y Desarrollo Comercial", desc: "Convierte tu idea de negocio en un proyecto con dirección y crecimiento.", items: ["Modelo de Negocio","Propuesta de Valor","Estrategias de crecimiento","Desarrollo de marca","Formalización de emprendimientos"] },
+            { title: "Estudios de Mercado", desc: "Conoce tu mercado y toma decisiones con información real.", items: ["Análisis de Competencia","Evaluación de Oportunidades de Negocio","Levantamiento de Información Comercial","Encuestas y Análisis de Resultados","Diagnósticos Comerciales"] },
+            { title: "Gestión Comercial", desc: "Organiza tu negocio para mejorar resultados y aumentar su rentabilidad.", items: ["Organización Administrativa","Indicadores de Gestión","Evaluación de Rentabilidad","Apoyo en Planificación Estratégica","Optimización de Procesos Internos"] },
+            { title: "Marketing y Redes Sociales", desc: "Potencia tu presencia digital y conecta con más clientes.", items: ["Diagnóstico de Redes Sociales","Estrategias de Contenido","Planificación de Historias, Reels y Publicaciones","Posicionamiento de la Marca","Análisis de Competencia","Estrategias de Fidelización de Clientes"] }
         ];
 
         function showService(index) {
             const service = services[index];
             document.getElementById('modalTitle').textContent = service.title;
             document.getElementById('modalDesc').textContent = service.desc;
-            
             const list = document.getElementById('modalList');
             list.innerHTML = '';
             service.items.forEach(item => {
@@ -307,7 +261,6 @@
                 li.innerHTML = `<span class="text-[#e89ab8]">•</span> ${item}`;
                 list.appendChild(li);
             });
-            
             document.getElementById('serviceModal').classList.remove('hidden');
             document.getElementById('serviceModal').classList.add('flex');
         }
@@ -318,14 +271,34 @@
             modal.classList.remove('flex');
         }
 
+        // WhatsApp Form
+        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const email = document.getElementById('email').value;
+            const asunto = document.getElementById('asunto').value;
+            const mensaje = document.getElementById('mensaje').value;
+
+            const texto = `*Nuevo mensaje desde el sitio web*%0A%0A` +
+                         `👤 *Nombre:* ${nombre}%0A` +
+                         `📞 *Teléfono:* ${telefono}%0A` +
+                         `✉️ *Correo:* ${email}%0A` +
+                         `📌 *Asunto:* ${asunto}%0A%0A` +
+                         `💬 *Mensaje:*%0A${mensaje}`;
+
+            // ==================== CAMBIA ESTE NÚMERO ====================
+            const numeroWhatsApp = "569XXXXXXXX";   // ← Reemplaza con tu número (ej: 56912345678)
+            // ============================================================
+
+            const url = `https://wa.me/${numeroWhatsApp}?text=${texto}`;
+            window.open(url, '_blank');
+        });
+
         // Cerrar modal con Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === "Escape") closeModal();
-        });
-
-        // Cerrar modal al hacer clic fuera
-        document.getElementById('serviceModal').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('serviceModal')) closeModal();
         });
     </script>
 </body>
