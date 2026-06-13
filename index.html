@@ -19,7 +19,18 @@
             font-family: 'Great Vibes', cursive;
         }
         .hero-bg {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://via.placeholder.com/1920x1080/fffaf0/f8c1d4?text=Foto+Profesional+Ivannia') center/cover no-repeat;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), 
+                        url('img/img_principal.jpeg') center/cover no-repeat;
+            background-position: center;
+        }
+
+        /* Modal */
+        .modal {
+            animation: fadeInModal 0.3s ease;
+        }
+        @keyframes fadeInModal {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
@@ -70,7 +81,6 @@
     <!-- A quiénes y Qué logras -->
     <section class="py-20 bg-[#fffaf0]">
         <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16">
-            <!-- A quiénes -->
             <div>
                 <h3 class="text-3xl heading-script text-[#e89ab8] mb-8">¿A quiénes están dirigidas mis asesorías?</h3>
                 <ul class="space-y-4 text-lg">
@@ -82,7 +92,6 @@
                 </ul>
             </div>
 
-            <!-- Qué logras -->
             <div>
                 <h3 class="text-3xl heading-script text-[#e89ab8] mb-8">¿Qué puedes lograr con una asesoría?</h3>
                 <ul class="space-y-4 text-lg">
@@ -103,53 +112,44 @@
             <h2 class="text-5xl heading-script text-center mb-16 text-[#e89ab8]">Servicios</h2>
             
             <div class="grid md:grid-cols-2 gap-10">
-                <div class="bg-[#fffaf0] p-10 rounded-3xl">
-                    <h3 class="text-2xl font-semibold mb-6">Emprendimiento y Desarrollo Comercial</h3>
-                    <p class="mb-6">Convierte tu idea en un proyecto con dirección y crecimiento.</p>
-                    <ul class="space-y-2 text-gray-700">
-                        <li>• Modelo de Negocio</li>
-                        <li>• Propuesta de Valor</li>
-                        <li>• Estrategias de crecimiento</li>
-                        <li>• Desarrollo de marca</li>
-                        <li>• Formalización de emprendimientos</li>
-                    </ul>
+                <div onclick="showService(0)" class="bg-[#fffaf0] p-10 rounded-3xl cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold mb-6 text-[#e89ab8]">Emprendimiento y Desarrollo Comercial</h3>
+                    <p class="text-gray-600">Convierte tu idea en un proyecto con dirección y crecimiento.</p>
                 </div>
 
-                <div class="bg-[#fffaf0] p-10 rounded-3xl">
-                    <h3 class="text-2xl font-semibold mb-6">Estudios de Mercado</h3>
-                    <p class="mb-6">Conoce tu mercado con información real.</p>
-                    <ul class="space-y-2 text-gray-700">
-                        <li>• Análisis de Competencia</li>
-                        <li>• Evaluación de Oportunidades</li>
-                        <li>• Levantamiento de Información</li>
-                        <li>• Encuestas y Diagnósticos</li>
-                    </ul>
+                <div onclick="showService(1)" class="bg-[#fffaf0] p-10 rounded-3xl cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold mb-6 text-[#e89ab8]">Estudios de Mercado</h3>
+                    <p class="text-gray-600">Conoce tu mercado con información real.</p>
                 </div>
 
-                <div class="bg-[#fffaf0] p-10 rounded-3xl">
-                    <h3 class="text-2xl font-semibold mb-6">Gestión Comercial</h3>
-                    <p class="mb-6">Organiza tu negocio para mejorar resultados.</p>
-                    <ul class="space-y-2 text-gray-700">
-                        <li>• Organización Administrativa</li>
-                        <li>• Indicadores de Gestión</li>
-                        <li>• Evaluación de Rentabilidad</li>
-                        <li>• Planificación Estratégica</li>
-                    </ul>
+                <div onclick="showService(2)" class="bg-[#fffaf0] p-10 rounded-3xl cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold mb-6 text-[#e89ab8]">Gestión Comercial</h3>
+                    <p class="text-gray-600">Organiza tu negocio para mejorar resultados.</p>
                 </div>
 
-                <div class="bg-[#fffaf0] p-10 rounded-3xl">
-                    <h3 class="text-2xl font-semibold mb-6">Marketing y Redes Sociales</h3>
-                    <p class="mb-6">Potencia tu presencia digital.</p>
-                    <ul class="space-y-2 text-gray-700">
-                        <li>• Diagnóstico de Redes Sociales</li>
-                        <li>• Estrategias de Contenido</li>
-                        <li>• Posicionamiento de Marca</li>
-                        <li>• Fidelización de Clientes</li>
-                    </ul>
+                <div onclick="showService(3)" class="bg-[#fffaf0] p-10 rounded-3xl cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold mb-6 text-[#e89ab8]">Marketing y Redes Sociales</h3>
+                    <p class="text-gray-600">Potencia tu presencia digital y conecta con más clientes.</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Modal -->
+    <div id="serviceModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
+        <div class="modal bg-white max-w-lg w-full mx-4 rounded-3xl overflow-hidden">
+            <div class="p-8">
+                <h3 id="modalTitle" class="text-3xl heading-script text-[#e89ab8] mb-6"></h3>
+                <p id="modalDesc" class="text-gray-700 mb-6"></p>
+                <ul id="modalList" class="space-y-3 text-gray-700"></ul>
+            </div>
+            <div class="border-t p-4 flex justify-end">
+                <button onclick="closeModal()" class="px-8 py-3 bg-gray-100 hover:bg-gray-200 rounded-2xl font-medium transition">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Cómo trabajo -->
     <section id="como-trabajo" class="py-24 bg-[#fffaf0]">
@@ -246,7 +246,87 @@
     </footer>
 
     <script>
-        // Tailwind script ya incluido
+        const services = [
+            {
+                title: "Emprendimiento y Desarrollo Comercial",
+                desc: "Convierte tu idea de negocio en un proyecto con dirección y crecimiento.",
+                items: [
+                    "Modelo de Negocio",
+                    "Propuesta de Valor",
+                    "Estrategias de crecimiento",
+                    "Desarrollo de marca",
+                    "Formalización de emprendimientos"
+                ]
+            },
+            {
+                title: "Estudios de Mercado",
+                desc: "Conoce tu mercado y toma decisiones con información real.",
+                items: [
+                    "Análisis de Competencia",
+                    "Evaluación de Oportunidades de Negocio",
+                    "Levantamiento de Información Comercial",
+                    "Encuestas y Análisis de Resultados",
+                    "Diagnósticos Comerciales"
+                ]
+            },
+            {
+                title: "Gestión Comercial",
+                desc: "Organiza tu negocio para mejorar resultados y aumentar su rentabilidad.",
+                items: [
+                    "Organización Administrativa",
+                    "Indicadores de Gestión",
+                    "Evaluación de Rentabilidad",
+                    "Apoyo en Planificación Estratégica",
+                    "Optimización de Procesos Internos"
+                ]
+            },
+            {
+                title: "Marketing y Redes Sociales",
+                desc: "Potencia tu presencia digital y conecta con más clientes.",
+                items: [
+                    "Diagnóstico de Redes Sociales",
+                    "Estrategias de Contenido",
+                    "Planificación de Historias, Reels y Publicaciones",
+                    "Posicionamiento de la Marca",
+                    "Análisis de Competencia",
+                    "Estrategias de Fidelización de Clientes"
+                ]
+            }
+        ];
+
+        function showService(index) {
+            const service = services[index];
+            document.getElementById('modalTitle').textContent = service.title;
+            document.getElementById('modalDesc').textContent = service.desc;
+            
+            const list = document.getElementById('modalList');
+            list.innerHTML = '';
+            service.items.forEach(item => {
+                const li = document.createElement('li');
+                li.className = "flex gap-3";
+                li.innerHTML = `<span class="text-[#e89ab8]">•</span> ${item}`;
+                list.appendChild(li);
+            });
+            
+            document.getElementById('serviceModal').classList.remove('hidden');
+            document.getElementById('serviceModal').classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('serviceModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Cerrar modal con Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") closeModal();
+        });
+
+        // Cerrar modal al hacer clic fuera
+        document.getElementById('serviceModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('serviceModal')) closeModal();
+        });
     </script>
 </body>
 </html>
